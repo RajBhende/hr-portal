@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 type Applicant = {
   name: string;
@@ -47,7 +48,9 @@ export default function ApplicantList({ selected }: ApplicantListProps): React.J
                 ? 'border-l-4 border-[#4F8FF0] border-t border-b border-r-0 bg-[#F1F6FF]'
                 : 'border border-gray-200'
             } group`}
-          >
+          ><Image src="/file.svg" alt="logo" width={24} height={24} className="..." />
+
+          
             <img src={app.avatar} alt={app.name} className="w-10 h-10 rounded-full z-10" />
             <div className="flex-1 z-10">
               <div className="font-bold text-gray-800 text-base mb-0.5">{app.name}</div>

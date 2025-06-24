@@ -29,7 +29,7 @@ export default function JobApplicantsPage(): React.JSX.Element {
         <div className="w-full max-w-xs flex-shrink-0">
           <ApplicantTabs />
           <div className="flex items-center gap-2 mt-2 mb-4">
-            {filterPills.map((pill, idx) => (
+{filterPills.map((pill) => (
               <button
                 key={pill.label}
                 className={`px-3 py-1 rounded-full text-xs font-medium border transition ${

@@ -1,18 +1,15 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import JobDetailsHeader from '../../components/JobDetailsHeader';
 
-interface JobDetailsLayoutProps {
-  children: ReactNode;
-  params: {
-    jobId: string;
-  };
-}
-
-export default function JobDetailsLayout({ children, params }: JobDetailsLayoutProps) {
+export default function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}): React.JSX.Element {
   return (
-    <div className="flex flex-col min-h-screen">
-      <JobDetailsHeader jobId={params.jobId} />
-      <div className="flex-1 flex bg-[#F8FAFC]">{children}</div>
+    <div>
+      <JobDetailsHeader />
+      {children}
     </div>
   );
 }

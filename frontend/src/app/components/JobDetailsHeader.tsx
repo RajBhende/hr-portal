@@ -1,13 +1,9 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
-type JobDetailsHeaderProps = {
-  jobId: string;
-};
-
-export default function JobDetailsHeader({ jobId }: JobDetailsHeaderProps): React.JSX.Element {
-  // Mock job data
+export default function JobDetailsHeader(): React.JSX.Element {
   const job = {
     title: 'User Experience and Research Intern',
     company: 'Tech Japan',
@@ -28,7 +24,13 @@ export default function JobDetailsHeader({ jobId }: JobDetailsHeaderProps): Reac
       {/* Job Info Card */}
       <div className="flex items-start gap-4 w-full">
         <div className="flex-1 flex items-center border border-[#4F8FF0] rounded-md p-3 bg-white min-w-0">
-          <img src="/file.svg" alt="logo" className="w-10 h-10 mr-3" />
+          <Image
+            src="/file.svg"
+            alt="logo"
+            width={40}
+            height={40}
+            className="mr-3"
+          />
           <div className="min-w-0">
             <div className="text-lg font-bold text-gray-800 truncate">{job.title}</div>
             <div className="text-gray-500 text-xs">
