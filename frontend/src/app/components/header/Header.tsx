@@ -8,11 +8,11 @@ const routeTitleMap: { [key: string]: string } = {
   '/dashboard': 'Dashboard',
   '/job-listing': 'Job Listing',
   '/job-listing/new': 'Post a New Job',
-  '/applicants': 'All Applicants',
   '/company-profile': 'Company Profile',
   '/schedule': 'Schedule',
+  '/all-applicants': 'All Applicants',
 };
-
+    
 export default function Header(): React.JSX.Element {
   const pathname = usePathname();
 
