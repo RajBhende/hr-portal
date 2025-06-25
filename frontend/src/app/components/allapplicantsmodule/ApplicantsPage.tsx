@@ -6,7 +6,19 @@ import ApplicantModal from './ApplicantModal';
 import ReviewFilterButton from './ReviewFilterButton';
 import AdvancedFilterModal from './AdvancedFilterModal';
 
-const applicants = [
+interface Applicant {
+  name: string;
+  role: string;
+  jobType: string;
+  uploads: number;
+  appliedOn: string;
+  status: string;
+  score: number;
+  scoreColor: string;
+  statusColor: string;
+}
+
+const applicants: Applicant[] = [
   {
     name: 'Gatikrushna Mohapatra',
     role: 'User Experience and Research Intern',
@@ -67,7 +79,7 @@ const applicants = [
 export default function ApplicantsPage() {
   const [selectedFilter, setSelectedFilter] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedApplicant, setSelectedApplicant] = useState<any>(null);
+  const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null);
   const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
   const [advancedFilters, setAdvancedFilters] = useState<{
     minScore: number;

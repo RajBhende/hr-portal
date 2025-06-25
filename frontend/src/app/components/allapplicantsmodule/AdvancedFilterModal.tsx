@@ -15,7 +15,6 @@ const AdvancedFilterModal: React.FC<AdvancedFilterModalProps> = ({ onClose, onAp
   const [minScore, setMinScore] = useState(0);
   const [maxScore, setMaxScore] = useState(10);
   const [jobType, setJobType] = useState('');
-  const [role, setRole] = useState('');
 
 
   const handleApply = () => {

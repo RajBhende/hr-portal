@@ -2,7 +2,22 @@
 
 import React from 'react';
 
-export default function ApplicantModal({ applicant, onClose }: { applicant: any; onClose: () => void }) {
+interface Applicant {
+  name: string;
+  role: string;
+  jobType: string;
+  uploads: number;
+  appliedOn: string;
+  status: string;
+  score: number;
+}
+
+interface ApplicantModalProps {
+  applicant: Applicant;
+  onClose: () => void;
+}
+
+export default function ApplicantModal({ applicant, onClose }: ApplicantModalProps) {
   if (!applicant) return null;
 
   return (
