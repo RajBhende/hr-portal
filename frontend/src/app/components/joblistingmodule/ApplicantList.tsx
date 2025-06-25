@@ -48,10 +48,23 @@ export default function ApplicantList({ selected }: ApplicantListProps): React.J
                 ? 'border-l-4 border-[#4F8FF0] border-t border-b border-r-0 bg-[#F1F6FF]'
                 : 'border border-gray-200'
             } group`}
-          ><Image src="/file.svg" alt="logo" width={24} height={24} className="..." />
+          >
+            <Image
+              src="/file.svg"
+              alt="logo"
+              width={24}
+              height={24}
+              className="shrink-0"
+            />
 
-          
-            <img src={app.avatar} alt={app.name} className="w-10 h-10 rounded-full z-10" />
+            <Image
+              src={app.avatar}
+              alt={app.name}
+              width={40}
+              height={40}
+              className="rounded-full z-10 object-cover"
+            />
+
             <div className="flex-1 z-10">
               <div className="font-bold text-gray-800 text-base mb-0.5">{app.name}</div>
               <div className="text-xs text-gray-500 mb-1">{app.title}</div>
@@ -64,7 +77,10 @@ export default function ApplicantList({ selected }: ApplicantListProps): React.J
               </div>
               <div className="text-xs text-gray-400">Applied {app.applied}</div>
             </div>
-            <div className="text-xs font-bold text-green-600 z-10">Score: {app.score}</div>
+
+            <div className="text-xs font-bold text-green-600 z-10">
+              Score: {app.score}
+            </div>
           </div>
         );
       })}

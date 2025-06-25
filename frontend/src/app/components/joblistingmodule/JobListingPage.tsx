@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Job = {
   id: number;
@@ -104,23 +105,75 @@ export default function JobListingPage(): React.JSX.Element {
             {jobs.map((job) => {
               const isDisabled = !job.active;
               return (
-                <tr key={job.id} className={`border-b last:border-0 ${isDisabled ? 'bg-gray-50' : ''}`}>
-                  <td className={`px-4 py-2 flex items-center gap-2 ${isDisabled ? 'text-gray-400 font-medium' : 'text-gray-800 font-medium'}`}>
-                    <img src="/file.svg" alt="logo" className="w-6 h-6" />
+                <tr
+                  key={job.id}
+                  className={`border-b last:border-0 ${
+                    isDisabled ? 'bg-gray-50' : ''
+                  }`}
+                >
+                  <td
+                    className={`px-4 py-2 flex items-center gap-2 ${
+                      isDisabled
+                        ? 'text-gray-400 font-medium'
+                        : 'text-gray-800 font-medium'
+                    }`}
+                  >
+                    <Image
+                      src="/file.svg"
+                      alt="Job Icon"
+                      width={24}
+                      height={24}
+                    />
                     {job.role}
                   </td>
                   <td className="px-4 py-2">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                      job.status === 'Live' ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-500'
-                    }`}>
+                    <span
+                      className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                        job.status === 'Live'
+                          ? 'bg-green-100 text-green-700'
+                          : 'bg-gray-200 text-gray-500'
+                      }`}
+                    >
                       {job.status}
                     </span>
                   </td>
-                  <td className={`px-4 py-2 ${isDisabled ? 'text-gray-400' : 'text-gray-700'}`}>{job.type}</td>
-                  <td className={`px-4 py-2 ${isDisabled ? 'text-gray-400' : 'text-gray-700'}`}>{job.posted}</td>
-                  <td className={`px-4 py-2 ${isDisabled ? 'text-gray-400' : 'text-gray-700'}`}>{job.due}</td>
-                  <td className={`px-4 py-2 ${isDisabled ? 'text-gray-400' : 'text-gray-700'}`}>{job.applicants}</td>
-                  <td className={`px-4 py-2 ${isDisabled ? 'text-gray-400' : 'text-gray-800 font-semibold'}`}>{job.needs}</td>
+                  <td
+                    className={`px-4 py-2 ${
+                      isDisabled ? 'text-gray-400' : 'text-gray-700'
+                    }`}
+                  >
+                    {job.type}
+                  </td>
+                  <td
+                    className={`px-4 py-2 ${
+                      isDisabled ? 'text-gray-400' : 'text-gray-700'
+                    }`}
+                  >
+                    {job.posted}
+                  </td>
+                  <td
+                    className={`px-4 py-2 ${
+                      isDisabled ? 'text-gray-400' : 'text-gray-700'
+                    }`}
+                  >
+                    {job.due}
+                  </td>
+                  <td
+                    className={`px-4 py-2 ${
+                      isDisabled ? 'text-gray-400' : 'text-gray-700'
+                    }`}
+                  >
+                    {job.applicants}
+                  </td>
+                  <td
+                    className={`px-4 py-2 ${
+                      isDisabled
+                        ? 'text-gray-400'
+                        : 'text-gray-800 font-semibold'
+                    }`}
+                  >
+                    {job.needs}
+                  </td>
                   <td className="px-4 py-2">
                     {job.active ? (
                       <Link href={`/job-listing/${job.id}`}>
