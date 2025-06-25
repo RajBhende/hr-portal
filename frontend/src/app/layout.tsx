@@ -1,5 +1,6 @@
 import './globals.css';
-import CustomNavbar from './components/CustomNavbar';
+import CustomNavbar from './components/sidebar/CustomNavbar';
+import Header from './components/header/Header'; // import your header component
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -17,7 +18,11 @@ export default function RootLayout({
       <body>
         <div className="flex flex-col min-h-screen md:flex-row">
           <CustomNavbar />
-          <main className="flex-1 bg-[#F8FAFC]">{children}</main>
+         <main className="flex-1 bg-[#F8FAFC]">
+            <Header /> {/* Add the header here */}
+            <div className="p-4">{children}</div> {/* Optional padding */}
+          </main>
+
         </div>
       </body>
     </html>

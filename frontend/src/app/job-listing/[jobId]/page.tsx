@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import ApplicantTabs from '../../components/ApplicantTabs';
-import ApplicantList from '../../components/ApplicantList';
-import ApplicantProfile from '../../components/ApplicantProfile';
+import ApplicantTabs from '../../components/joblistingmodule/ApplicantTabs';
+import ApplicantList from '../../components/joblistingmodule/ApplicantList';
+import ApplicantProfile from '../../components/joblistingmodule/ApplicantProfile';
 
 interface FilterPill {
   label: string;

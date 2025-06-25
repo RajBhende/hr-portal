@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ResumeCV from './ResumeCV';
-
 type Applicant = {
   name: string;
   title: string;

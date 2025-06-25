@@ -34,7 +34,7 @@ const navItems: NavItem[] = [
   },
   {
     name: 'All applicants',
-    href: '/applicants',
+    href: '/all-applicants',
     icon: (
       <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
         <rect width="20" height="20" rx="4" fill="#F3F4F6" />
@@ -138,3 +138,4 @@ export default function CustomNavbar(): React.JSX.Element {
     </aside>
   );
 }
+  

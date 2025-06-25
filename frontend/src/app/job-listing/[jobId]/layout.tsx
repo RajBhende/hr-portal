@@ -1,5 +1,5 @@
 import React from 'react';
-import JobDetailsHeader from '../../components/JobDetailsHeader';
+import JobDetailsHeader from '../../components/joblistingmodule/JobDetailsHeader';
 
 export default function Layout({
   children,

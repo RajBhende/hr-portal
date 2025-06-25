@@ -15,7 +15,7 @@ const tabs: Tab[] = [
 ];
 
 export default function ApplicantTabs(): React.JSX.Element {
-  const activeTab = 1; // static for now, set to 1 for 'Shortlisted'
+  const activeTab = 5; // static for now, set to 1 for 'Shortlisted'
 
   return (
     <nav className="flex gap-8 px-6 pt-4 pb-2 border-b bg-white text-base font-medium">
