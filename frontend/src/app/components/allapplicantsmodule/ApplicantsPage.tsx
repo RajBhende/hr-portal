@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import ApplicantModal from './ApplicantModal';
 import ReviewFilterButton from './ReviewFilterButton';
 import AdvancedFilterModal from './AdvancedFilterModal';
-
+import { useRouter } from 'next/navigation';
 interface Applicant {
   name: string;
   role: string;
@@ -14,11 +13,10 @@ interface Applicant {
   appliedOn: string;
   status: string;
   score: number;
-  scoreColor: string;
-  statusColor: string;
+  scoreColor: string; 
 }
 
-const applicants: Applicant[] = [
+const initialApplicants: Applicant[] = [
   {
     name: 'Gatikrushna Mohapatra',
     role: 'User Experience and Research Intern',
@@ -28,7 +26,6 @@ const applicants: Applicant[] = [
     status: 'Shortlisted',
     score: 10,
     scoreColor: 'text-green-600',
-    statusColor: 'bg-blue-100 text-blue-700',
   },
   {
     name: 'Gatikrushna Mohapatra',
@@ -39,7 +36,6 @@ const applicants: Applicant[] = [
     status: 'Shortlisted',
     score: 9,
     scoreColor: 'text-green-600',
-    statusColor: 'bg-blue-100 text-blue-700',
   },
   {
     name: 'Gatikrushna Mohapatra',
@@ -47,10 +43,9 @@ const applicants: Applicant[] = [
     jobType: 'Full Time',
     uploads: 3,
     appliedOn: '08.11.2023',
-    status: 'Hired',
+    status: 'May Fit',
     score: 9,
     scoreColor: 'text-green-600',
-    statusColor: 'bg-green-100 text-green-700',
   },
   {
     name: 'Gatikrushna Mohapatra',
@@ -61,7 +56,6 @@ const applicants: Applicant[] = [
     status: 'New',
     score: 7,
     scoreColor: 'text-yellow-500',
-    statusColor: 'bg-gray-100 text-gray-600',
   },
   {
     name: 'Gatikrushna Mohapatra',
@@ -72,20 +66,27 @@ const applicants: Applicant[] = [
     status: 'Declined',
     score: 2,
     scoreColor: 'text-red-500',
-    statusColor: 'bg-red-100 text-red-700',
   },
 ];
 
+const statusColorMap: Record<string, string> = {
+  Shortlisted: 'bg-blue-100 text-blue-700',
+  New: 'bg-purple-100 text-purple-700',
+  Declined: 'bg-red-100 text-red-700',
+  'May Fit': 'bg-yellow-100 text-yellow-700',
+};
+
 export default function ApplicantsPage() {
+  const [applicants, setApplicants] = useState<Applicant[]>(initialApplicants);
   const [selectedFilter, setSelectedFilter] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedApplicant, setSelectedApplicant] = useState<Applicant | null>(null);
   const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
   const [advancedFilters, setAdvancedFilters] = useState<{
     minScore: number;
     maxScore: number;
     jobType: string;
   } | null>(null);
+  const router = useRouter();
 
   const itemsPerPage = 3;
 
@@ -117,6 +118,12 @@ export default function ApplicantsPage() {
     startIndex + itemsPerPage
   );
 
+  const handleStatusChange = (index: number, newStatus: string) => {
+    const updated = [...applicants];
+    updated[index].status = newStatus;
+    setApplicants(updated);
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold text-gray-800 mb-1">Applicants</h1>
@@ -126,7 +133,7 @@ export default function ApplicantsPage() {
 
       {/* Filter Buttons */}
       <div className="flex flex-wrap gap-3 mb-4">
-        {['All', 'Shortlisted', 'New', 'Declined', 'Hired'].map((filter) => (
+        {['All', 'Shortlisted', 'New', 'Declined', 'May Fit'].map((filter) => (
           <button
             key={filter}
             onClick={() => setSelectedFilter(filter)}
@@ -154,48 +161,56 @@ export default function ApplicantsPage() {
       </div>
 
       {/* Table Rows */}
-      {paginatedApplicants.map((applicant, index) => (
-        <div
-          key={index}
-          className="grid grid-cols-7 gap-4 items-center border-b py-4 px-3 text-sm"
-        >
-          <div className="flex items-center gap-3">
-            <Image
-              src="/avatar-placeholder.png"
-              alt="Avatar"
-              width={32}
-              height={32}
-              className="rounded-full"
-            />
-            <div>
-              <div className="font-medium text-gray-900">{applicant.name}</div>
-              <div className="text-gray-500 text-xs">Applied 26 days ago</div>
-              <div className={`text-xs font-semibold ${applicant.scoreColor}`}>
-                Score: {applicant.score}
+      {paginatedApplicants.map((applicant, index) => {
+        const globalIndex = startIndex + index;
+        return (
+          <div
+            key={globalIndex}
+            className="grid grid-cols-7 gap-4 items-center border-b py-4 px-3 text-sm"
+          >
+            <div className="flex items-center gap-3">
+              <Image
+                src="/avatar-placeholder.png"
+                alt="Avatar"
+                width={32}
+                height={32}
+                className="rounded-full"
+              />
+              <div>
+                <div className="font-medium text-gray-900">{applicant.name}</div>
+                <div className="text-gray-500 text-xs">Applied 26 days ago</div>
+                <div className={`text-xs font-semibold ${applicant.scoreColor}`}>
+                  Score: {applicant.score}
+                </div>
               </div>
             </div>
+            <div className="text-gray-700">{applicant.role}</div>
+            <div className="text-gray-700">{applicant.jobType}</div>
+            <div className="text-gray-700">{applicant.uploads} files</div>
+            <div className="text-gray-700">{applicant.appliedOn}</div>
+            <div>
+              <select
+                value={applicant.status}
+                onChange={(e) => handleStatusChange(globalIndex, e.target.value)}
+                className={`px-3 py-1 text-sm rounded-md shadow-md ${statusColorMap[applicant.status] || 'bg-white text-gray-700'}`}
+              >
+                <option value="New">New</option>
+                <option value="Shortlisted">Shortlisted</option>
+                <option value="Declined">Declined</option>
+                <option value="May Fit">May Fit</option>
+              </select>
+            </div>
+            <div>
+             <button
+  onClick={() => router.push(`/all-applicants/${globalIndex}`)} // ✅ fixed
+  className="bg-[#4F8FF0] hover:bg-[#3B77D3] text-white px-4 py-2 rounded-md text-sm"
+>
+  Review Application
+</button>
+            </div>
           </div>
-          <div className="text-gray-700">{applicant.role}</div>
-          <div className="text-gray-700">{applicant.jobType}</div>
-          <div className="text-gray-700">{applicant.uploads} files</div>
-          <div className="text-gray-700">{applicant.appliedOn}</div>
-          <div>
-            <button
-              className={`px-3 py-1 text-sm rounded-md ${applicant.statusColor}`}
-            >
-              {applicant.status}
-            </button>
-          </div>
-          <div>
-            <button
-              onClick={() => setSelectedApplicant(applicant)}
-              className="bg-[#4F8FF0] hover:bg-[#3B77D3] text-white px-4 py-2 rounded-md text-sm"
-            >
-              Review Application
-            </button>
-          </div>
-        </div>
-      ))}
+        );
+      })}
 
       {/* Pagination */}
       <div className="flex justify-center mt-6 gap-4">
@@ -234,13 +249,8 @@ export default function ApplicantsPage() {
         />
       )}
 
-      {/* Applicant Modal */}
-      {selectedApplicant && (
-        <ApplicantModal
-          applicant={selectedApplicant}
-          onClose={() => setSelectedApplicant(null)}
-        />
-      )}
+     
+
     </div>
   );
 }
