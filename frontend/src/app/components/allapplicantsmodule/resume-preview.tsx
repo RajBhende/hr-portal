@@ -6,7 +6,7 @@ export default function ResumePreview() {
   const [activeSection, setActiveSection] = useState<'none' | 'profile' | 'resume' | 'contact' | 'files' | 'shortlist'>('none');
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="bg-gray-50">
       <div className="max-w-4xl mx-auto bg-white shadow-md rounded-2xl p-6 flex flex-col gap-4 relative">
 
         {/* Name & Role */}
@@ -17,7 +17,7 @@ export default function ResumePreview() {
               UI/UX Designer, Pursuing Bachelors of Design from IIT Hyderabad
             </p>
           </div>
-          <div className="text-gray-500 text-xl font-bold">⋯</div>
+          <div className="text-gray-500 text-xl font-bold">⋯</div>  
         </div>
 
         {/* Skills */}

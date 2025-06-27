@@ -39,7 +39,7 @@ export default function ApplicantReviewDetail() {
           {/* Job 1 */}
           <div className="flex items-start justify-between mb-4">
             <div className="flex gap-3">
-              <Image src="/job-icon.png" alt="job icon" width={16} height={16} className="mt-1" />
+              <Image src="/job-icon.png" alt="job icon" width={16} height={16} className="mt-1" style={{ objectFit: 'contain' }}/>
               <div>
                 <p className="font-semibold text-sm text-gray-900 leading-snug">
                   User Experience and<br />Research Intern
@@ -53,7 +53,7 @@ export default function ApplicantReviewDetail() {
           {/* Job 2 */}
           <div className="flex items-start justify-between">
             <div className="flex gap-3">
-              <Image src="/job-icon.png" alt="job icon" width={16} height={16} className="mt-1" />
+              <Image src="/job-icon.png" alt="job icon" width={16} height={16} className="mt-1" style={{ objectFit: 'contain' }}/>
               <div>
                 <p className="font-semibold text-sm text-gray-900 leading-snug">
                   User Interface Design Intern
